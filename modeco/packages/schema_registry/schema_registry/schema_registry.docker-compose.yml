@@ -1,0 +1,26 @@
+---
+version: '3'
+services:
+
+# START SERVICE schema_registry.base
+  schema_registry:
+    image: ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.schema_registry.base:5.4.0
+    environment: ['SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=zookeeper:2181', 'SCHEMA_REGISTRY_HOST_NAME= schema_registry']
+    command: []
+    volumes: ['package_schema_registry_schema_registry_secrets_volume:/etc/schema-registry/secrets']
+    ports: []
+    networks: [package_overlay]
+    deploy:
+      mode: replicated
+      resources:
+        limits:
+          cpus: '${SCHEMA_REGISTRY_DEPLOY_RESOURCES_LIMITS_CPUS}'
+          memory: '${SCHEMA_REGISTRY_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          cpus: '${SCHEMA_REGISTRY_DEPLOY_RESOURCES_RESERVATIONS_CPUS}'
+          memory: '${SCHEMA_REGISTRY_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+      labels: []
+# END SERVICE schema_registry.base
+
+volumes: {package_schema_registry_schema_registry_secrets_volume: { external: true }}
+networks: {package_overlay: { external: true }}
