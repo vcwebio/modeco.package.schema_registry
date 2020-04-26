@@ -5,7 +5,7 @@ export CONTECO_DESCRIPTION="Modeco Confluent Schema Registry module package."
 
 export CONTECO_TYPE="package"
 export CONTECO_NAME="schema_registry"
-export CONTECO_TAG="v1.0.0"
+export CONTECO_TAG="5.4.0"
 export CONTECO_TAG_TYPE="incremental"
 
 export CONTECO_BASE="image.wrapper"
