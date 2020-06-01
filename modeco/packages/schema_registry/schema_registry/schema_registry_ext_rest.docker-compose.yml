@@ -12,6 +12,7 @@ services:
     networks: [modeco_overlay, package_overlay]
     deploy:
       mode: replicated
+      replicas: ${SCHEMA_REGISTRY_EXT_REST_DEPLOY_REPLICAS}
       resources:
         limits:
           cpus: '${SCHEMA_REGISTRY_EXT_REST_DEPLOY_RESOURCES_LIMITS_CPUS}'
@@ -19,7 +20,10 @@ services:
         reservations:
           cpus: '${SCHEMA_REGISTRY_EXT_REST_DEPLOY_RESOURCES_RESERVATIONS_CPUS}'
           memory: '${SCHEMA_REGISTRY_EXT_REST_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+      placement:
+        constraints: [${SCHEMA_REGISTRY_EXT_REST_DEPLOY_PLACEMENT_CONSTRAINTS}]
       labels: [traefik.enable=true,traefik.docker.network=modeco_overlay, traefik.http.services.package_schema_registry_nginx.loadbalancer.server.port=80, traefik.http.routers.package_schema_registry_nginx.entrypoints=conteco, traefik.http.routers.package_schema_registry_nginx.rule=PathPrefix("/package/schema_registry/rest")]
+    labels: [${SCHEMA_REGISTRY_EXT_REST_LABELS}]
 # END SERVICE nginx.rewrite
 
 volumes: {}
