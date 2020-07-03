@@ -12,7 +12,7 @@ services:
     networks: [${CONTECO_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
-      replicas: ${CONTECO_DC_SCHEMA_REGISTRY_DEPLOY_REPLICAS}
+      ${CONTECO_DC_SCHEMA_REGISTRY_DEPLOY_MODE_REPLICATED_REPLICAS}
       resources:
         limits:
           cpus: '${CONTECO_DC_SCHEMA_REGISTRY_DEPLOY_RESOURCES_LIMITS_CPUS}'
@@ -22,7 +22,7 @@ services:
           memory: '${CONTECO_DC_SCHEMA_REGISTRY_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
       placement:
         constraints: [${CONTECO_DC_SCHEMA_REGISTRY_DEPLOY_PLACEMENT_CONSTRAINTS}]
-      labels: []
+      labels: [${CONTECO_DC_SCHEMA_REGISTRY_DEPLOY_LABELS}]
     labels: [${CONTECO_DC_SCHEMA_REGISTRY_LABELS}]
 # END SERVICE schema_registry.base
 

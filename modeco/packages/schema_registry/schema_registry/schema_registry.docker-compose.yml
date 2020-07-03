@@ -12,7 +12,7 @@ services:
     networks: [package_overlay]
     deploy:
       mode: replicated
-      replicas: ${SCHEMA_REGISTRY_DEPLOY_REPLICAS}
+      ${SCHEMA_REGISTRY_DEPLOY_MODE_REPLICATED_REPLICAS}
       resources:
         limits:
           cpus: '${SCHEMA_REGISTRY_DEPLOY_RESOURCES_LIMITS_CPUS}'
@@ -22,7 +22,7 @@ services:
           memory: '${SCHEMA_REGISTRY_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
       placement:
         constraints: [${SCHEMA_REGISTRY_DEPLOY_PLACEMENT_CONSTRAINTS}]
-      labels: []
+      labels: [${SCHEMA_REGISTRY_DEPLOY_LABELS}]
     labels: [${SCHEMA_REGISTRY_LABELS}]
 # END SERVICE schema_registry.base
 
